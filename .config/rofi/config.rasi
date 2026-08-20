@@ -1,0 +1,133 @@
+@theme "catppuccin-default"
+
+configuration {
+    modi: "drun,run,filebrowser,window";
+    hover-select: true;
+    case-sensitive: false;
+    font: "MesloLGM Nerd Font Mono 12";
+	show-icons: true;
+    icon-theme: "Papirus-Dark";
+
+    /*---------- Drun settings ----------*/
+    display-drun:" Apps";
+    drun-display-format: "{name}";
+    drun-match-fields: "name,generic,exec,categories,keywords";
+    drun-url-launcher: "xdg-open";
+    drun {
+		parse-user: true;
+		parse-system: true;
+    }
+
+    /*---------- Run settings ----------*/
+    display-run: " Run";
+	run-command: "{cmd}";
+	run-shell-command: "{terminal} -e {cmd}";
+
+    /*---------- Window switcher settings ----------*/
+    display-window: " Window";
+	window-match-fields: "title,class,role,name,desktop";
+	window-command: "wmctrl -i -R {window}";
+	window-format: "{w} - {c} - {t:0}";
+	window-thumbnail: false;
+
+    /*---------- File browser settings ----------*/
+    display-filebrowser: " Files";
+    filebrowser {
+        directories-first: true;
+        sorting-method: "name";
+    }
+
+    /*---------- Misc setting ----------*/
+	terminal: "rofi-sensible-terminal";
+	font: "Mono 12";
+	sort: false;
+	threads: 0;
+	click-to-exit: true;
+
+    /*---------- Other settings ----------*/
+    timeout {
+        action: "kb-cancel";
+        delay: 0;
+    }
+}
+
+window {
+    location: center;
+    width: 600px;
+    background-color: @base;
+    border: 2px;
+    border-color: @mauve;
+    border-radius: 16px;
+    padding: 8px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    spacing: 12px;
+    padding: 8px;
+}
+
+inputbar {
+    background-color: @mantle;
+    border-radius: 12px;
+    padding: 10px 14px;
+    spacing: 10px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: @mauve;
+    font: "MesloLGM Nerd Font Bold 11";
+}
+
+entry {
+    placeholder: "Search…";
+    placeholder-color: @overlay0;
+    text-color: @text;
+}
+
+listview {
+    columns: 1;
+    lines: 8;
+    spacing: 4px;
+    fixed-height: false;
+    scrollbar: false;
+}
+
+element {
+    padding: 8px 12px;
+    border-radius: 10px;
+    spacing: 10px;
+}
+
+element normal.normal {
+    text-color: @text;
+    background-color: transparent;
+}
+
+element selected.normal {
+    background-color: @surface0;
+    text-color: @lavender;
+    border: 0px 0px 0px 3px;
+    border-color: @mauve;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @text;
+}
+
+element-icon {
+    size: 22px;
+    vertical-align: 0.5;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: inherit;
+}
+
+scrollbar {
+    handle-color: @surface1;
+    handle-width: 4px;
+}
