@@ -1,12 +1,12 @@
 {
     "label": "shutdown",
-    "action": "systemctl poweroff",
+    "action": "hyprshutdown -t 'Shutting down...' --post-cmd 'systemctl poweroff'",
     "text": "Shutdown",
     "keybind": "s"
 }
 {
     "label": "reboot",
-    "action": "systemctl reboot",
+    "action": "hyprshutdown -t 'Restarting...' --post-cmd 'systemctl reboot'",
     "text": "Reboot",
     "keybind": "r"
 }
@@ -18,7 +18,7 @@
 }
 {
     "label": "logout",
-    "action": "hyprshutdown",
+    "action": "uwsm stop",
     "text": "Logout",
     "keybind": "e"
 }

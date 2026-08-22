@@ -30,7 +30,7 @@
 hl.monitor({
     output   = "",
     mode     = "highres@highrr",
-    position = "auto",
+    position = "0x0",
     scale    = 1.2,
 })
 
@@ -43,6 +43,8 @@ hl.monitor({
 local terminal    = "kitty"
 local fileManager = "thunar"
 local menu        = "rofi -show"
+local clipboard   = "cliphist list | rofi -dmenu -display-columns 2 -p Clipboard | cliphist decode | wl-copy"
+local lock        = "hyprlock"
 
 
 -------------------
@@ -70,21 +72,7 @@ end)
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
-hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
-hl.env("XDG_SESSION_TYPE", "wayland")
-hl.env("XDG_SESSION_DESKTOP", "Hyprland")
-hl.env("GDK_BACKEND", "wayland,x11,*")
-hl.env("SDL_VIDEODRIVER", "wayland")
-hl.env("CLUTTER_BACKEND", "wayland")
-hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
-hl.env("QT_QPA_PLATFORM", "wayland;xcb")
-hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
-hl.env("QT_QPA_PLATFORMTHEME", "kvantum")
-hl.env("QT_QPA_PLATFORMTHEME_QT6", "kvantum")
-hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
-hl.env("HYPRCURSOR_THEME", "Catppuccin Mocha Dark")
-hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("XCURSOR_SIZE", "24")
+-- hl.env("KEY", "value")
 
 
 -----------------------
@@ -254,7 +242,7 @@ hl.config({
     input = {
         kb_layout          = "br",
         kb_variant         = "",
-        kb_model           = "",
+        kb_model           = "abnt2",
         kb_options         = "",
         kb_rules           = "",
 
@@ -292,12 +280,9 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
-local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprshutdown"))
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mainMod .. " + V",
-    hl.dsp.exec_cmd("cliphist list | rofi -dmenu -display-columns 2 -p Clipboard | cliphist decode | wl-copy"))
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(lock))
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(clipboard))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + Z", hl.dsp.window.float({ action = "toggle" }))
@@ -339,8 +324,8 @@ hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ to
     { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
     { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -n2 s 10%+"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -n2 s 10%-"), { locked = true, repeating = true })
 
 -- Requires playerctl
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
