@@ -32,6 +32,7 @@ hl.monitor({
     mode     = "highres@highrr",
     position = "0x0",
     scale    = 1.2,
+    mirror   = "HDMI-A-1",
 })
 
 
@@ -281,6 +282,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(lock))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(clipboard))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
