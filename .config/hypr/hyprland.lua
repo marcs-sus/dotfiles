@@ -59,11 +59,12 @@ local lock        = "hyprlock"
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("uwsm app -- hyprlauncher -d")
-    hl.exec_cmd("uwsm app -- nm-applet")
-    hl.exec_cmd("uwsm app -- kdeconnectd")
-    hl.exec_cmd("uwsm app -- kdeconnect-indicator")
     hl.exec_cmd("uwsm app -- wl-paste --type text --watch cliphist store")
     hl.exec_cmd("uwsm app -- wl-paste --type image --watch cliphist store")
+    hl.exec_cmd("uwsm app -- nm-applet")
+    hl.exec_cmd("uwsm app -- snappy-switcher --daemon")
+    hl.exec_cmd("uwsm app -- kdeconnectd")
+    hl.exec_cmd("uwsm app -- kdeconnect-indicator")
 end)
 
 
@@ -304,6 +305,10 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
     hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
+
+-- Switch windows across workspaces
+hl.bind("ALT + Tab", hl.dsp.exec_cmd("snappy-switcher next --mod alt"))
+hl.bind("SUPER + TAB", hl.dsp.exec_cmd("snappy-switcher next --workspace --mod super"))
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))

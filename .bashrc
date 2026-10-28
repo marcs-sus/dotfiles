@@ -105,5 +105,6 @@ esac
 
 # Android
 export ANDROID_HOME="$HOME/.local/android/sdk"
+export ANDROID_SDK_ROOT="$ANDROID_HOME"
 export CHROME_EXECUTABLE="/usr/bin/brave-origin"
-
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator:$PATH"
